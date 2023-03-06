@@ -174,6 +174,7 @@ public class MainPlayScript : MonoBehaviour
         //generate a new word
         generateRandomWord();
     }
+    //method to increase score
     void increaseScore(float amount) {
         currentScore += amount;
         score.text = "Score: " + currentScore.ToString();

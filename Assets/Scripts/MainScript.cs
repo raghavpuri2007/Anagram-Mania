@@ -11,6 +11,11 @@ public class MainScript : MonoBehaviour
     public void Leaderboard() {
         SceneManager.LoadScene("LeaderboardScene");
     }
+
+    public void Options() {
+        SceneManager.LoadScene("OptionsScene");
+    }
+
     public void Quit() {
         Application.Quit();
     }
