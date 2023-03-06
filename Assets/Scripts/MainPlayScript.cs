@@ -8,28 +8,34 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class MainPlayScript : MonoBehaviour
 {
+    //general group
     private List<string> wholeFile;
     public GameObject letterObject;
     public GameObject dashObject;
     private int mode;
 
+    //backgrounds group
     public Sprite[] backgrounds;
     public Image background;
 
+    //displayed objects group
     public static GameObject[] letters;
     public static GameObject[] dashes;
 
-    //everything under this is good
+    //timer group
     public TextMeshProUGUI timer;
     private float currentTime;
     private float timerLimit;
 
+    //score group
     public TextMeshProUGUI score;
     public static float currentScore;
 
+    //words group
     private string currentWord;
     private string scrambledWord;
 
+    //audio group
     public AudioSource audioSource;
     public AudioClip correctAnswerSound;
     public AudioClip incorrectAnswerSound;
@@ -59,8 +65,9 @@ public class MainPlayScript : MonoBehaviour
             correctAnswer();
         }
     }
-
+    //method to create dashes displayed on the screen
     private void createDashes() {
+        //instantiate each dash with name and position
         for(int i = 0; i < dashes.Length; i++) {
             GameObject dash = Instantiate(dashObject, new Vector3(0, -100, 0), transform.rotation) as GameObject;
             dash.transform.SetParent(GameObject.FindGameObjectWithTag("background").transform, false);
@@ -69,14 +76,14 @@ public class MainPlayScript : MonoBehaviour
             dashes[i] = dash;
         }
     }
-
+    //method to generate a word from text file
     private void generateRandomWord() {
         bool found = false;
         while(!found) {
+            //random number in the list
             int ranNo1= Random.Range(0, wholeFile.Count);
             if(wholeFile[ranNo1].Length == mode) {
                 //checks if it is a realistic word (if it contains vowels)
-
                 if(wholeFile[ranNo1].Contains("a") || wholeFile[ranNo1].Contains("e") || wholeFile[ranNo1].Contains("i") || wholeFile[ranNo1].Contains("o") || wholeFile[ranNo1].Contains("u")) {
                     found = true;
                     currentWord = wholeFile[ranNo1];
@@ -86,9 +93,10 @@ public class MainPlayScript : MonoBehaviour
         }
         createLetters(shuffle(currentWord));
     }
+    //method to create the letters displayed on the game
     private void createLetters(string word) {
         scrambledWord = word;
-        //instantiate letter1
+        //instantiate each letter with name, position, and display text
         for(int i = 0; i < mode; i++) {
             GameObject currentLetter = Instantiate(letterObject, transform.position, transform.rotation) as GameObject;
             currentLetter.transform.SetParent(GameObject.FindGameObjectWithTag("background").transform, false);
@@ -102,18 +110,24 @@ public class MainPlayScript : MonoBehaviour
         }
         
     }
+    //checks if the correct answer is inputted (always is checking in Update())
     bool isCorrectAnswer() {
         bool InCorrectPosition = true;
+        //for each letter
         for(int i = 0; i < letters.Length; i++) {
-            //i = currentLetter 
+            //for each dash
             for(int j = 0; j < dashes.Length; j++) {
+                //position of current dash
                 Vector3 position = new Vector3(dashes[j].transform.position.x, dashes[j].transform.position.y+150, 0);
+                //check if letter is in a position
                 if(letters[i].transform.position == position) {
+                    //check if the letter is in the RIGHT position
                     if(scrambledWord[i] != currentWord[j]) {
                         InCorrectPosition = false;
                     }
                     break;
                 } else {
+                    //if the letter is not sitting on a dash then we automatically know the answer is incorrect
                     if(j == dashes.Length-1) {
                         return false;
                     }
@@ -146,22 +160,25 @@ public class MainPlayScript : MonoBehaviour
             dashes[i].GetComponent<Image>().color = Color.white;
         }
     }
-
+    //method if user puts in correct answer
     void correctAnswer() {
         //destroy old letters;
         StartCoroutine(ColorChange(Color.green));
         for(int i = 0; i < letters.Length; i++) {
             Destroy(letters[i]);
         }
+        //increase the score by score
         increaseScore(1000);
+        //play correct sound
         audioSource.PlayOneShot(correctAnswerSound);
+        //generate a new word
         generateRandomWord();
     }
     void increaseScore(float amount) {
         currentScore += amount;
         score.text = "Score: " + currentScore.ToString();
     }
-    //method to scramble a word, good
+    //method to scramble a word
     string shuffle(string word) {
         string newWord = "";
         int index = 0;
@@ -170,16 +187,24 @@ public class MainPlayScript : MonoBehaviour
             newWord += word[index];
             word = word.Substring(0, index) + word.Substring(index+1);
         }
+        //checks to make sure the scrambled word is not the same as the current word
+        if(word.Equals(newWord)) {
+            return shuffle(word);        
+        }
         return newWord;
     }
-    //GOOD
+
+    //method for timer management
     void timerStuff() {
+        //decrease the time
         currentTime -= Time.deltaTime;
+        //if time is 0
         if(currentTime <= timerLimit) {
             currentTime = timerLimit;
             timer.color = Color.red;
             SceneManager.LoadScene("GameOverScene");
         }
+        //displays current time in the game
         timer.text = "Time: " + currentTime.ToString("0");
     }
 }
