@@ -30,6 +30,7 @@ public class MainPlayScript : MonoBehaviour
     //score group
     public TextMeshProUGUI score;
     public static float currentScore;
+    private int streak;
 
     //words group
     private string currentWord;
@@ -64,6 +65,8 @@ public class MainPlayScript : MonoBehaviour
         if(isCorrectAnswer()) {
             correctAnswer();
         }
+        updateStreak();
+        
     }
     //method to create dashes displayed on the screen
     private void createDashes() {
@@ -136,6 +139,7 @@ public class MainPlayScript : MonoBehaviour
         }
         //if in correct position return true;
         if(InCorrectPosition) {
+            streak+=1;
             return true;
         }
         StartCoroutine(ColorChange(Color.red));
@@ -143,6 +147,7 @@ public class MainPlayScript : MonoBehaviour
         for(int i = 0; i < mode; i++) {
             letters[i].transform.position = letters[i].GetComponent<DragAndDrop>().origin;
         }
+        streak = 0;
         return false;
     }
     //change each dash in array
@@ -173,6 +178,11 @@ public class MainPlayScript : MonoBehaviour
         audioSource.PlayOneShot(correctAnswerSound);
         //generate a new word
         generateRandomWord();
+    }
+
+    void updateStreak() {
+        ProgressBar.current = streak;
+        ProgressBar.streak= streak;
     }
     //method to increase score
     void increaseScore(float amount) {
