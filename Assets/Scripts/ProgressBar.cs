@@ -5,13 +5,13 @@ using UnityEngine.UI;
 using TMPro;
 public class ProgressBar : MonoBehaviour
 {
-    public int maximum;
+    public static int maximum;
     public static float current;
     public Image fill;
     public static int streak;
     public TextMeshProUGUI streakText;
     public TextMeshProUGUI bonus;
-    private int currentBonus;
+    public static int currentBonus;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,15 +32,18 @@ public class ProgressBar : MonoBehaviour
         if(streak > maximum) {
             maximum+=3;
         } else if(streak == maximum) {
-            reachedBonus();
+            StartCoroutine(reachedBonus());
         }
         float fillAmount = current / (float) maximum;
         fill.transform.localScale = new Vector3(fillAmount, 1, 1);
     }
 
-    void reachedBonus() {
+    IEnumerator reachedBonus() {
         bonus.text = "Bonus: +" + currentBonus;
         bonus.enabled = true;
+        yield return new WaitForSeconds(2f);
+        bonus.enabled = false;
+        currentBonus+=500;
         //still need to increase score
     }
 }

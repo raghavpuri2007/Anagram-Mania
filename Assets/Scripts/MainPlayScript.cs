@@ -183,6 +183,9 @@ public class MainPlayScript : MonoBehaviour
     void updateStreak() {
         ProgressBar.current = streak;
         ProgressBar.streak= streak;
+        // if(ProgressBar.streak == ProgressBar.maximum) {
+        //     increaseScore(ProgressBar.currentBonus);
+        // }
     }
     //method to increase score
     void increaseScore(float amount) {
