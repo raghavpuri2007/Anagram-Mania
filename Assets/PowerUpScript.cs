@@ -29,4 +29,10 @@ public class PowerUpScript : MonoBehaviour
     {
         
     }
+
+    void purchased() {
+        //go through each power up and check if name matches
+        //call the helper method for the specific ability ie. "time freeze"
+        //disable the power up for x time
+    }
 }
