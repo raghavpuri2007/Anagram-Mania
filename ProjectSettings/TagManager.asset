@@ -6,6 +6,7 @@ TagManager:
   tags:
   - canvas
   - background
+  - shop
   layers:
   - Default
   - TransparentFX
