@@ -29,10 +29,10 @@ public class ProgressBar : MonoBehaviour
     }
 
     void GetCurrentFill() {
-        if(streak > maximum) {
-            maximum+=3;
-        } else if(streak == maximum) {
+        if(streak == maximum) {
             StartCoroutine(reachedBonus());
+            maximum+=3;
+            currentBonus+=500;
         }
         float fillAmount = current / (float) maximum;
         fill.transform.localScale = new Vector3(fillAmount, 1, 1);
@@ -43,7 +43,6 @@ public class ProgressBar : MonoBehaviour
         bonus.enabled = true;
         yield return new WaitForSeconds(2f);
         bonus.enabled = false;
-        currentBonus+=500;
         //still need to increase score
     }
 }

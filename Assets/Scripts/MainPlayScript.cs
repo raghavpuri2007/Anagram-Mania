@@ -12,6 +12,7 @@ public class MainPlayScript : MonoBehaviour
     private List<string> wholeFile;
     public GameObject letterObject;
     public GameObject dashObject;
+    public GameObject powerUpObject;
     private int mode;
 
     //backgrounds group
@@ -56,6 +57,7 @@ public class MainPlayScript : MonoBehaviour
         background.sprite = backgrounds[mode-3];
         createDashes();
         generateRandomWord();
+        createShop();
     }
 
     // Update is called once per frame
@@ -112,6 +114,22 @@ public class MainPlayScript : MonoBehaviour
 
         }
         
+    }
+
+    private void createShop() {
+        //create power ups
+        for(int i = 0; i < 3; /*can change this later*/ i++) {
+            GameObject currentPowerUp = Instantiate(powerUpObject, transform.position, transform.rotation) as GameObject;
+            currentPowerUp.transform.SetParent(GameObject.FindGameObjectWithTag("shop").transform, false);
+            // Debug.Log();
+            currentPowerUp.transform.position = new Vector3(GameObject.FindGameObjectWithTag("shop").transform.position.x, GameObject.FindGameObjectWithTag("shop").transform.position.y + 100 + (i*-135), 0);
+            PowerUpScript script = currentPowerUp.GetComponent<PowerUpScript>();
+            
+            //will eventually have array with each power up
+            script.name = "Time Freeze";
+            script.cost = "1000";
+            script.nameColor = new Color32(40, 242, 255, 255);
+        }
     }
     //checks if the correct answer is inputted (always is checking in Update())
     bool isCorrectAnswer() {
@@ -183,9 +201,9 @@ public class MainPlayScript : MonoBehaviour
     void updateStreak() {
         ProgressBar.current = streak;
         ProgressBar.streak= streak;
-        // if(ProgressBar.streak == ProgressBar.maximum) {
-        //     increaseScore(ProgressBar.currentBonus);
-        // }
+        if(ProgressBar.streak == ProgressBar.maximum) {
+            increaseScore(ProgressBar.currentBonus);
+        }
     }
     //method to increase score
     void increaseScore(float amount) {

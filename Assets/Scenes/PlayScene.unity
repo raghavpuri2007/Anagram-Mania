@@ -1186,7 +1186,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: 10000'
+  m_text: 'Score: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0bf8798f2f50fb48908eeca2c3e44eb, type: 2}
   m_sharedMaterial: {fileID: 7294959927819069924, guid: e0bf8798f2f50fb48908eeca2c3e44eb, type: 2}
@@ -1355,7 +1355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2545bb2440b95104088139598a071c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximum: 100
   fill: {fileID: 1581646754}
   streakText: {fileID: 596495557}
   bonus: {fileID: 1805569140}
