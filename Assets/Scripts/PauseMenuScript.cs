@@ -25,6 +25,9 @@ public class PauseMenuScript : MonoBehaviour
         for(int i = 0; i < MainPlayScript.letters.Length; i++) {
             MainPlayScript.letters[i].SetActive(false);
             MainPlayScript.dashes[i].SetActive(false);
+            if(i < MainPlayScript.powerUps.Length) {
+                MainPlayScript.powerUps[i].SetActive(false);
+            }
         }
         Time.timeScale = 0f;
     }
@@ -34,6 +37,9 @@ public class PauseMenuScript : MonoBehaviour
         for(int i = 0; i < MainPlayScript.letters.Length; i++) {
             MainPlayScript.letters[i].SetActive(true);
             MainPlayScript.dashes[i].SetActive(true);
+            if(i < MainPlayScript.powerUps.Length) {
+                MainPlayScript.powerUps[i].SetActive(true);
+            }
         }
         Time.timeScale= 1f;
     }

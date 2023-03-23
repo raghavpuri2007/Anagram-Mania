@@ -1655,7 +1655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   letterObject: {fileID: 8103743907043289717, guid: 706707b8528e69d42b48b4dc10aa4394, type: 3}
   dashObject: {fileID: 2254139659303705294, guid: b62626ffc3c23cf4e99f59857f3a3332, type: 3}
-  powerUpObject: {fileID: 5063234583588425330, guid: 575035d6cb565744c914955eb88b9341, type: 3}
+  powerUpObject: {fileID: 8197477298502532763, guid: 575035d6cb565744c914955eb88b9341, type: 3}
   backgrounds:
   - {fileID: 21300000, guid: 371ffecf0bf49164b9a7025bae11015c, type: 3}
   - {fileID: 21300000, guid: 323bd3bdd4981db4fb7542a9a5eb37aa, type: 3}
@@ -1667,6 +1667,7 @@ MonoBehaviour:
   audioSource: {fileID: 1133785993}
   correctAnswerSound: {fileID: 8300000, guid: ee3de87ac9decac488f6d65d044ffc32, type: 3}
   incorrectAnswerSound: {fileID: 8300000, guid: 027d35b14efd81646afccdf693750f33, type: 3}
+  timeFreeze: 0
 --- !u!82 &1133785993
 AudioSource:
   m_ObjectHideFlags: 0

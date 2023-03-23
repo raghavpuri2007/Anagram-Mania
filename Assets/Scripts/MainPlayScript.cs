@@ -22,6 +22,7 @@ public class MainPlayScript : MonoBehaviour
     //displayed objects group
     public static GameObject[] letters;
     public static GameObject[] dashes;
+    public static GameObject[] powerUps;
 
     //timer group
     public TextMeshProUGUI timer;
@@ -42,6 +43,9 @@ public class MainPlayScript : MonoBehaviour
     public AudioClip correctAnswerSound;
     public AudioClip incorrectAnswerSound;
 
+    //powerup helpers
+    public bool timeFreeze;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +58,8 @@ public class MainPlayScript : MonoBehaviour
         currentScore = 0;
         letters = new GameObject[mode];
         dashes = new GameObject[mode];
+        powerUps = new GameObject[3];
+        timeFreeze = false;
         background.sprite = backgrounds[mode-3];
         createDashes();
         generateRandomWord();
@@ -115,7 +121,6 @@ public class MainPlayScript : MonoBehaviour
         }
         
     }
-
     private void createShop() {
         //create power ups
         for(int i = 0; i < 3; /*can change this later*/ i++) {
@@ -129,8 +134,9 @@ public class MainPlayScript : MonoBehaviour
             script.name = "Time Freeze";
             script.cost = "1000";
             script.nameColor = new Color32(40, 242, 255, 255);
+            powerUps[i] = currentPowerUp;
         }
-    }
+    }   
     //checks if the correct answer is inputted (always is checking in Update())
     bool isCorrectAnswer() {
         bool InCorrectPosition = true;
@@ -206,7 +212,7 @@ public class MainPlayScript : MonoBehaviour
         }
     }
     //method to increase score
-    void increaseScore(float amount) {
+    public void increaseScore(float amount) {
         currentScore += amount;
         score.text = "Score: " + currentScore.ToString();
     }
@@ -229,14 +235,16 @@ public class MainPlayScript : MonoBehaviour
     //method for timer management
     void timerStuff() {
         //decrease the time
-        currentTime -= Time.deltaTime;
-        //if time is 0
-        if(currentTime <= timerLimit) {
-            currentTime = timerLimit;
-            timer.color = Color.red;
-            SceneManager.LoadScene("GameOverScene");
+        if(!timeFreeze) {
+            currentTime -= Time.deltaTime;
+            //if time is 0
+            if(currentTime <= timerLimit) {
+                currentTime = timerLimit;
+                timer.color = Color.red;
+                SceneManager.LoadScene("GameOverScene");
+            }
+            //displays current time in the game
         }
-        //displays current time in the game
         timer.text = "Time: " + currentTime.ToString("0");
     }
 }
