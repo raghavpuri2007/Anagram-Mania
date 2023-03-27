@@ -1664,6 +1664,9 @@ MonoBehaviour:
   background: {fileID: 1344591698}
   timer: {fileID: 212472182}
   score: {fileID: 715942722}
+  streak: 0
+  currentWord: 
+  scrambledWord: 
   audioSource: {fileID: 1133785993}
   correctAnswerSound: {fileID: 8300000, guid: ee3de87ac9decac488f6d65d044ffc32, type: 3}
   incorrectAnswerSound: {fileID: 8300000, guid: 027d35b14efd81646afccdf693750f33, type: 3}

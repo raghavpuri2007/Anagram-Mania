@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 4876186854617082451}
   - component: {fileID: 8538635534018138567}
   - component: {fileID: 5839067838637134531}
+  - component: {fileID: 5012357238341888601}
   m_Layer: 5
   m_Name: PowerUp
   m_TagString: Untagged
@@ -369,7 +370,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -424,3 +425,23 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 0
   thisPowerUp: {fileID: 8538635534018138567}
+--- !u!95 &5012357238341888601
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8197477298502532763}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 59d22f1480314ab42994c14cd3e7a64d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

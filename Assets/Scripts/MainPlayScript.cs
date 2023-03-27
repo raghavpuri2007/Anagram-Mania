@@ -28,6 +28,7 @@ public class MainPlayScript : MonoBehaviour
     public TextMeshProUGUI timer;
     private float currentTime;
     private float timerLimit;
+    private float currentWordTimer;
 
     //score group
     public TextMeshProUGUI score;
@@ -56,6 +57,7 @@ public class MainPlayScript : MonoBehaviour
         timerLimit = 0;
         currentTime = 45;
         currentScore = 0;
+        currentWordTimer = 0;
         letters = new GameObject[mode];
         dashes = new GameObject[mode];
         powerUps = new GameObject[3];
@@ -80,9 +82,9 @@ public class MainPlayScript : MonoBehaviour
     private void createDashes() {
         //instantiate each dash with name and position
         for(int i = 0; i < dashes.Length; i++) {
-            GameObject dash = Instantiate(dashObject, new Vector3(0, -100, 0), transform.rotation) as GameObject;
+            GameObject dash = Instantiate(dashObject, new Vector3(0, -250, 0), transform.rotation) as GameObject;
             dash.transform.SetParent(GameObject.FindGameObjectWithTag("background").transform, false);
-            dash.transform.position = new Vector3(dash.transform.position.x+((-400+(-200*(mode-3)))+(i*400)), dash.transform.position.y, 0);
+            dash.transform.position = new Vector3(dash.transform.position.x+((-320+(-160*(mode-3)))+(i*320)), dash.transform.position.y, 0);
             dash.name = $"Dash{i+1}";
             dashes[i] = dash;
         }
@@ -111,7 +113,7 @@ public class MainPlayScript : MonoBehaviour
         for(int i = 0; i < mode; i++) {
             GameObject currentLetter = Instantiate(letterObject, transform.position, transform.rotation) as GameObject;
             currentLetter.transform.SetParent(GameObject.FindGameObjectWithTag("background").transform, false);
-            currentLetter.transform.position = new Vector3(dashes[i].transform.position.x, dashes[i].transform.position.y-300, 0);
+            currentLetter.transform.position = new Vector3(dashes[i].transform.position.x, dashes[i].transform.position.y-200, 0);
             currentLetter.name = $"letter{i+1}";
 
             TextMeshProUGUI currentLetterText =  currentLetter.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
@@ -154,7 +156,7 @@ public class MainPlayScript : MonoBehaviour
             //for each dash
             for(int j = 0; j < dashes.Length; j++) {
                 //position of current dash
-                Vector3 position = new Vector3(dashes[j].transform.position.x, dashes[j].transform.position.y+150, 0);
+                Vector3 position = new Vector3(dashes[j].transform.position.x, dashes[j].transform.position.y+100, 0);
                 //check if letter is in a position
                 if(letters[i].transform.position == position) {
                     //check if the letter is in the RIGHT position
@@ -206,7 +208,9 @@ public class MainPlayScript : MonoBehaviour
             Destroy(letters[i]);
         }
         //increase the score by score
-        increaseScore(1000);
+        float difference = Mathf.Round(currentWordTimer * 5);
+        currentWordTimer = 0;
+        increaseScore(1000 - difference + ((mode-1)*250));
         //play correct sound
         audioSource.PlayOneShot(correctAnswerSound);
         //generate a new word
@@ -254,6 +258,7 @@ public class MainPlayScript : MonoBehaviour
             }
             //displays current time in the game
         }
+        currentWordTimer += Time.deltaTime;
         timer.text = "Time: " + currentTime.ToString("0");
     }
 }

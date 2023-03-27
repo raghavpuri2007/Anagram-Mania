@@ -92,14 +92,14 @@ public class PowerUpScript : MonoBehaviour
     void freeLetter() {
         for(int i = 0; i < MainPlayScript.letters.Length; i++) {
             for(int j = 0; j < MainPlayScript.dashes.Length; j++) {
-                Vector3 position = new Vector3(MainPlayScript.dashes[j].transform.position.x, MainPlayScript.dashes[j].transform.position.y+150, 0);
+                Vector3 position = new Vector3(MainPlayScript.dashes[j].transform.position.x, MainPlayScript.dashes[j].transform.position.y+100, 0);
                 if(MainPlayScript.letters[i].transform.position == position) {
                     j = MainPlayScript.dashes.Length;
                 } else {
                     if(j == MainPlayScript.dashes.Length-1) {
                         //found a letter not moved
                         int index = mainScript.currentWord.IndexOf(mainScript.scrambledWord[i]);
-                        MainPlayScript.letters[i].transform.position = new Vector3(MainPlayScript.dashes[index].transform.position.x, MainPlayScript.dashes[index].transform.position.y + 150, 0);;
+                        MainPlayScript.letters[i].transform.position = new Vector3(MainPlayScript.dashes[index].transform.position.x, MainPlayScript.dashes[index].transform.position.y + 100, 0);;
                         
                         //getting out of loops
                         i = MainPlayScript.letters.Length;

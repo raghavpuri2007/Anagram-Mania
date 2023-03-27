@@ -21,7 +21,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
         bool foundDash = false;
         for(int i = 0; i < MainPlayScript.dashes.Length; i++) {
             if(dashChecker(MainPlayScript.dashes[i])) {
-                letter.transform.position = new Vector3(MainPlayScript.dashes[i].transform.position.x, MainPlayScript.dashes[i].transform.position.y + 150, 0);
+                letter.transform.position = new Vector3(MainPlayScript.dashes[i].transform.position.x, MainPlayScript.dashes[i].transform.position.y + 100, 0);
                 foundDash = true;
             }
         }
