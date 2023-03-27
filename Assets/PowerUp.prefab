@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TIME FREEZE
+  m_text: Streak BooST
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0bf8798f2f50fb48908eeca2c3e44eb, type: 2}
   m_sharedMaterial: {fileID: 7294959927819069924, guid: e0bf8798f2f50fb48908eeca2c3e44eb, type: 2}
@@ -210,8 +210,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294963752
-  m_fontColor: {r: 0.15686274, g: 0.94948214, b: 1, a: 1}
+    rgba: 4282929905
+  m_fontColor: {r: 0.9433962, g: 0.32238856, b: 0.28183213, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -423,3 +423,4 @@ MonoBehaviour:
   nameColor:
     serializedVersion: 2
     rgba: 0
+  thisPowerUp: {fileID: 8538635534018138567}

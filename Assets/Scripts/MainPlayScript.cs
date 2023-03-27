@@ -32,11 +32,11 @@ public class MainPlayScript : MonoBehaviour
     //score group
     public TextMeshProUGUI score;
     public static float currentScore;
-    private int streak;
+    public int streak;
 
     //words group
-    private string currentWord;
-    private string scrambledWord;
+    public string currentWord;
+    public string scrambledWord;
 
     //audio group
     public AudioSource audioSource;
@@ -129,11 +129,20 @@ public class MainPlayScript : MonoBehaviour
             // Debug.Log();
             currentPowerUp.transform.position = new Vector3(GameObject.FindGameObjectWithTag("shop").transform.position.x, GameObject.FindGameObjectWithTag("shop").transform.position.y + 100 + (i*-135), 0);
             PowerUpScript script = currentPowerUp.GetComponent<PowerUpScript>();
-            
+            if(i == 0) {
+                script.name = "Time Freeze";
+                script.cost = "1500";
+                script.nameColor = new Color32(40, 242, 255, 255);
+            } else if(i ==1 ) {
+                script.name = "Free Letter";
+                script.cost = "500";
+                script.nameColor = new Color32(169, 250, 108, 255);
+            } else if(i == 2) {
+                script.name = "Streak Boost";
+                script.cost = "1500";
+                script.nameColor = new Color32(241, 82, 72, 255);
+            }
             //will eventually have array with each power up
-            script.name = "Time Freeze";
-            script.cost = "1000";
-            script.nameColor = new Color32(40, 242, 255, 255);
             powerUps[i] = currentPowerUp;
         }
     }   
