@@ -32,6 +32,7 @@ public class MainPlayScript : MonoBehaviour
 
     //score group
     public TextMeshProUGUI score;
+    public TextMeshProUGUI wordScore;
     public static float currentScore;
     public int streak;
 
@@ -43,6 +44,7 @@ public class MainPlayScript : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip correctAnswerSound;
     public AudioClip incorrectAnswerSound;
+
 
     //powerup helpers
     public bool timeFreeze;
@@ -62,6 +64,7 @@ public class MainPlayScript : MonoBehaviour
         dashes = new GameObject[mode];
         powerUps = new GameObject[3];
         timeFreeze = false;
+        wordScore.enabled = false;
         background.sprite = backgrounds[mode-3];
         createDashes();
         generateRandomWord();
@@ -208,15 +211,22 @@ public class MainPlayScript : MonoBehaviour
             Destroy(letters[i]);
         }
         //increase the score by score
-        float difference = Mathf.Round(currentWordTimer * 5);
+        //score
+        float score = 750 - Mathf.Round(currentWordTimer * 6) + ((mode-3)*250);
         currentWordTimer = 0;
-        increaseScore(1000 - difference + ((mode-1)*250));
+        increaseScore(score);
+        StartCoroutine(wordScoreCoroutine(score));
         //play correct sound
         audioSource.PlayOneShot(correctAnswerSound);
         //generate a new word
         generateRandomWord();
     }
-
+    IEnumerator wordScoreCoroutine(float score) {
+        wordScore.text = "Score: +" + score;
+        wordScore.enabled = true;
+        yield return new WaitForSeconds(1f);
+        wordScore.enabled = false;
+    }
     void updateStreak() {
         ProgressBar.current = streak;
         ProgressBar.streak= streak;

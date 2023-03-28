@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     private Image letter;
     public Vector3 origin;
     
 
-    public void OnBeginDrag(PointerEventData eventData) {
-        //NOTHING
-    }
     public void OnDrag(PointerEventData eventData) {
         transform.position = Input.mousePosition;
         letter.color = new Color32(123, 0, 226, 100);
@@ -21,6 +18,8 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
         bool foundDash = false;
         for(int i = 0; i < MainPlayScript.dashes.Length; i++) {
             if(dashChecker(MainPlayScript.dashes[i])) {
+                //checks if letter is in same spot
+                replaceLetter(i);
                 letter.transform.position = new Vector3(MainPlayScript.dashes[i].transform.position.x, MainPlayScript.dashes[i].transform.position.y + 100, 0);
                 foundDash = true;
             }
@@ -47,21 +46,11 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
         return false;
     }
 
-    // private void OnCollisionEnter2D(Collision2D collision) {
-    //     if(collision.gameObject.name == "Letter") {
-    //         Debug.Log("enter");
-    //     }
-    // }
-
-    // private void OnCollisionStay2D(Collision2D collision) {
-    //     if(collision.gameObject.name == "Letter") {
-    //         Debug.Log("stay");
-    //     }
-    // }
-
-    // private void OnCollisionExit2D(Collision2D collision) {
-    //     if(collision.gameObject.name == "Letter") {
-    //         Debug.Log("exit");
-    //     }
-    // }
+    private void replaceLetter(int dashIndex) {
+        for(int i = 0; i < MainPlayScript.letters.Length; i++) {
+            if(MainPlayScript.letters[i].transform.position == new Vector3(MainPlayScript.dashes[dashIndex].transform.position.x, MainPlayScript.dashes[dashIndex].transform.position.y + 100, 0)) {
+                MainPlayScript.letters[i].transform.position = MainPlayScript.letters[i].GetComponent<DragAndDrop>().origin;
+            }
+        }
+    }
 }
