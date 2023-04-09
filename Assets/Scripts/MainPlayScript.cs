@@ -73,7 +73,7 @@ public class MainPlayScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         timerStuff();
         if(isCorrectAnswer()) {
             correctAnswer();
@@ -239,21 +239,28 @@ public class MainPlayScript : MonoBehaviour
         currentScore += amount;
         score.text = "Score: " + currentScore.ToString();
     }
-    //method to scramble a word
+    //method to scramble the current word
     string shuffle(string word) {
+        //string to hold scrambled word
         string newWord = "";
-        int index = 0;
+        int randomIndex = 0;
         while(!string.IsNullOrEmpty(word)) {
-            index = Random.Range(0, word.Length);
-            newWord += word[index];
-            word = word.Substring(0, index) + word.Substring(index+1);
+            //grab a random index in the word
+            randomIndex = Random.Range(0, word.Length);
+            //add the random letter to the new word
+            newWord += word[randomIndex];
+            //remove the random letter from original word
+            word = word.Substring(0, randomIndex) + 
+            word.Substring(randomIndex+1);
         }
-        //checks to make sure the scrambled word is not the same as the current word
-        if(word.Equals(newWord)) {
-            return shuffle(word);        
+        //checks to make sure shuffle
+        //not same as orignal word
+        if(currentWord.Equals(newWord)) {
+            return shuffle(currentWord);        
         }
         return newWord;
     }
+
 
     //method for timer management
     void timerStuff() {
