@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class LevelsScript : MonoBehaviour
 {
+
+    public void Update() {
+        if (Input.GetKeyDown("escape"))
+        {
+            Application.Quit();
+        }
+    }
+
     public void EasyMode() {
         PlayerPrefs.SetInt("mode", 3);
         SceneManager.LoadScene("PlayScene");
