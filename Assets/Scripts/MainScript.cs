@@ -11,18 +11,22 @@ public class MainScript : MonoBehaviour
             Application.Quit();
         }
     }
+    //Play Button Clicked
     public void Play() {
         SceneManager.LoadScene("LevelsScene");
     }
 
+    //Leaderboard Button Clicked
     public void Leaderboard() {
         SceneManager.LoadScene("LeaderboardScene");
     }
 
-    public void Options() {
+    //Instructions Button Clicked
+    public void Instructions() {
         SceneManager.LoadScene("InstructionsScene");
     }
 
+    //Quit Button Clicked
     public void Quit() {
         Application.Quit();
     }

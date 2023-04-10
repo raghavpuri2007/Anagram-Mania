@@ -56,16 +56,24 @@ public class MainPlayScript : MonoBehaviour
         string readFromFilePath = Application.streamingAssetsPath + "/Words/words.txt";
         wholeFile = File.ReadAllLines(readFromFilePath).ToList();
         mode = PlayerPrefs.GetInt("mode");
+        //variable to hold time limit
         timerLimit = 0;
+        //variable to hold starting time
         currentTime = 45;
+        //score variable
         currentScore = 0;
+        //timer for one word
         currentWordTimer = 0;
+        //arrays for different groups
         letters = new GameObject[mode];
         dashes = new GameObject[mode];
         powerUps = new GameObject[3];
+        //time freeze power up boolean (starts false)
         timeFreeze = false;
+        //score from specific word
         wordScore.enabled = false;
         background.sprite = backgrounds[mode-3];
+        //create all the objects on screen
         createDashes();
         generateRandomWord();
         createShop();
@@ -74,7 +82,9 @@ public class MainPlayScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
+        //all the timer related things
         timerStuff();
+        //always checking if the user did the correct answer
         if(isCorrectAnswer()) {
             correctAnswer();
         }
@@ -135,19 +145,25 @@ public class MainPlayScript : MonoBehaviour
         //create power ups
         float costMultiplier = 100;
         for(int i = 0; i < 3; i++) {
+            //create the power up object
             GameObject currentPowerUp = Instantiate(powerUpObject, transform.position, transform.rotation) as GameObject;
             currentPowerUp.transform.SetParent(GameObject.FindGameObjectWithTag("shop").transform, false);
-            // Debug.Log();
+            //put the power up in correct position (within shop rect)
             currentPowerUp.transform.position = new Vector3(GameObject.FindGameObjectWithTag("shop").transform.position.x, GameObject.FindGameObjectWithTag("shop").transform.position.y + 150 + (i*-200), 0);
             PowerUpScript script = currentPowerUp.GetComponent<PowerUpScript>();
+            //for now it is preset power ups
+
+            //1 - Time Freeze
             if(i == 0) {
                 script.name = "Time Freeze";
                 script.cost = (1500 - ((mode-3) * (costMultiplier*2)))+ "";
                 script.nameColor = new Color32(40, 242, 255, 255);
+            //2 - Free Letter
             } else if(i ==1 ) {
                 script.name = "Free Letter";
                 script.cost = (500 - ((mode-3)*costMultiplier)) + "";
                 script.nameColor = new Color32(169, 250, 108, 255);
+            //3 - Streak Boost
             } else if(i == 2) {
                 script.name = "Streak Boost";
                 script.cost = (1500 - ((mode-3) * (costMultiplier*2)))+ "";
@@ -186,11 +202,14 @@ public class MainPlayScript : MonoBehaviour
             streak+=1;
             return true;
         }
+        //incorrect answer
         StartCoroutine(ColorChange(Color.red));
         audioSource.PlayOneShot(incorrectAnswerSound);
+        //put all letters back to original positions
         for(int i = 0; i < mode; i++) {
             letters[i].transform.position = letters[i].GetComponent<DragAndDrop>().origin;
         }
+        //reset streak
         streak = 0;
         return false;
     }
@@ -227,12 +246,16 @@ public class MainPlayScript : MonoBehaviour
         //generate a new word
         generateRandomWord();
     }
+    //coroutine to display score from the word for 1 second
     IEnumerator wordScoreCoroutine(float score) {
+        //display the word
         wordScore.text = "Score: +" + score;
         wordScore.enabled = true;
         yield return new WaitForSeconds(1f);
+        //disable the object
         wordScore.enabled = false;
     }
+    //always called to check for a streak boost
     void updateStreak() {
         ProgressBar.current = streak;
         ProgressBar.streak= streak;
@@ -281,6 +304,7 @@ public class MainPlayScript : MonoBehaviour
             }
             //displays current time in the game
         }
+        //variable to see how long it takes for the user to unscramble the current word
         currentWordTimer += Time.deltaTime;
         timer.text = "Time: " + currentTime.ToString("0");
     }
