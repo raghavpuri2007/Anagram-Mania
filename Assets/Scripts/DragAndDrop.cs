@@ -11,10 +11,10 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnDrag(PointerEventData eventData) {
         transform.position = Input.mousePosition;
-        letter.color = new Color32(123, 0, 226, 100);
+        letter.color = new Color32(238, 221, 187, 200);
     }
     public void OnEndDrag(PointerEventData eventData) {
-        letter.color = new Color32(123, 0, 226, 150);
+        letter.color = new Color32(238, 221, 187, 255);
         bool foundDash = false;
         for(int i = 0; i < MainPlayScript.dashes.Length; i++) {
             if(dashChecker(MainPlayScript.dashes[i])) {

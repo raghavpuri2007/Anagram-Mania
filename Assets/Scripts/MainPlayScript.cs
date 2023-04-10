@@ -133,7 +133,8 @@ public class MainPlayScript : MonoBehaviour
     }
     private void createShop() {
         //create power ups
-        for(int i = 0; i < 3; /*can change this later*/ i++) {
+        float costMultiplier = 100;
+        for(int i = 0; i < 3; i++) {
             GameObject currentPowerUp = Instantiate(powerUpObject, transform.position, transform.rotation) as GameObject;
             currentPowerUp.transform.SetParent(GameObject.FindGameObjectWithTag("shop").transform, false);
             // Debug.Log();
@@ -141,15 +142,15 @@ public class MainPlayScript : MonoBehaviour
             PowerUpScript script = currentPowerUp.GetComponent<PowerUpScript>();
             if(i == 0) {
                 script.name = "Time Freeze";
-                script.cost = "1500";
+                script.cost = (1500 - ((mode-3) * (costMultiplier*2)))+ "";
                 script.nameColor = new Color32(40, 242, 255, 255);
             } else if(i ==1 ) {
                 script.name = "Free Letter";
-                script.cost = "500";
+                script.cost = (500 - ((mode-3)*costMultiplier)) + "";
                 script.nameColor = new Color32(169, 250, 108, 255);
             } else if(i == 2) {
                 script.name = "Streak Boost";
-                script.cost = "1500";
+                script.cost = (1500 - ((mode-3) * (costMultiplier*2)))+ "";
                 script.nameColor = new Color32(241, 82, 72, 255);
             }
             //will eventually have array with each power up
