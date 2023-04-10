@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainScript : MonoBehaviour
 {
+    public void Update() {
+        //escape key pressed
+        if (Input.GetKeyDown("escape"))
+        {
+            Application.Quit();
+        }
+    }
     public void Play() {
         SceneManager.LoadScene("LevelsScene");
     }
@@ -13,7 +20,7 @@ public class MainScript : MonoBehaviour
     }
 
     public void Options() {
-        SceneManager.LoadScene("OptionsScene");
+        SceneManager.LoadScene("InstructionsScene");
     }
 
     public void Quit() {

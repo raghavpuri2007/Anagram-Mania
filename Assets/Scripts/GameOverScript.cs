@@ -26,6 +26,13 @@ public class GameOverScript : MonoBehaviour
         audioSource.PlayOneShot(gameOverSound);
     }
 
+    public void Update() {
+        if (Input.GetKeyDown("escape"))
+        {
+            Application.Quit();
+        }
+    }
+
     public void SaveButton() {
         saveMenu.SetActive(true);
     }

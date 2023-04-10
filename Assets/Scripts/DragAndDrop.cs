@@ -20,7 +20,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
             if(dashChecker(MainPlayScript.dashes[i])) {
                 //checks if letter is in same spot
                 replaceLetter(i);
-                letter.transform.position = new Vector3(MainPlayScript.dashes[i].transform.position.x, MainPlayScript.dashes[i].transform.position.y + 100, 0);
+                letter.transform.position = new Vector3(MainPlayScript.dashes[i].transform.position.x, MainPlayScript.dashes[i].transform.position.y + 150, 0);
                 foundDash = true;
             }
         }
@@ -48,7 +48,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void replaceLetter(int dashIndex) {
         for(int i = 0; i < MainPlayScript.letters.Length; i++) {
-            if(MainPlayScript.letters[i].transform.position == new Vector3(MainPlayScript.dashes[dashIndex].transform.position.x, MainPlayScript.dashes[dashIndex].transform.position.y + 100, 0)) {
+            if(MainPlayScript.letters[i].transform.position == new Vector3(MainPlayScript.dashes[dashIndex].transform.position.x, MainPlayScript.dashes[dashIndex].transform.position.y + 150, 0)) {
                 MainPlayScript.letters[i].transform.position = MainPlayScript.letters[i].GetComponent<DragAndDrop>().origin;
             }
         }

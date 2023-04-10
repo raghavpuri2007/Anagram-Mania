@@ -10,6 +10,8 @@ public class SwapScenes : MonoBehaviour
  
         if (SceneManager.GetActiveScene().name == "GameOverScene") {
             BGmusic.instance.GetComponent<AudioSource>().Pause();
+        } else {
+            BGmusic.instance.GetComponent<AudioSource>().UnPause();
         }
     }
 }

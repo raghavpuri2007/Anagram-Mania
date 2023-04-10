@@ -79,6 +79,11 @@ public class MainPlayScript : MonoBehaviour
             correctAnswer();
         }
         updateStreak();
+        //escape key pressed
+        if (Input.GetKeyDown("escape"))
+        {
+            Application.Quit();
+        }
         
     }
     //method to create dashes displayed on the screen
@@ -87,7 +92,7 @@ public class MainPlayScript : MonoBehaviour
         for(int i = 0; i < dashes.Length; i++) {
             GameObject dash = Instantiate(dashObject, new Vector3(0, -250, 0), transform.rotation) as GameObject;
             dash.transform.SetParent(GameObject.FindGameObjectWithTag("background").transform, false);
-            dash.transform.position = new Vector3(dash.transform.position.x+((-320+(-160*(mode-3)))+(i*320)), dash.transform.position.y, 0);
+            dash.transform.position = new Vector3(dash.transform.position.x+((-420+(-210*(mode-3)))+(i*420)), dash.transform.position.y -75, 0);
             dash.name = $"Dash{i+1}";
             dashes[i] = dash;
         }
@@ -132,7 +137,7 @@ public class MainPlayScript : MonoBehaviour
             GameObject currentPowerUp = Instantiate(powerUpObject, transform.position, transform.rotation) as GameObject;
             currentPowerUp.transform.SetParent(GameObject.FindGameObjectWithTag("shop").transform, false);
             // Debug.Log();
-            currentPowerUp.transform.position = new Vector3(GameObject.FindGameObjectWithTag("shop").transform.position.x, GameObject.FindGameObjectWithTag("shop").transform.position.y + 100 + (i*-135), 0);
+            currentPowerUp.transform.position = new Vector3(GameObject.FindGameObjectWithTag("shop").transform.position.x, GameObject.FindGameObjectWithTag("shop").transform.position.y + 150 + (i*-200), 0);
             PowerUpScript script = currentPowerUp.GetComponent<PowerUpScript>();
             if(i == 0) {
                 script.name = "Time Freeze";
@@ -159,7 +164,7 @@ public class MainPlayScript : MonoBehaviour
             //for each dash
             for(int j = 0; j < dashes.Length; j++) {
                 //position of current dash
-                Vector3 position = new Vector3(dashes[j].transform.position.x, dashes[j].transform.position.y+100, 0);
+                Vector3 position = new Vector3(dashes[j].transform.position.x, dashes[j].transform.position.y+150, 0);
                 //check if letter is in a position
                 if(letters[i].transform.position == position) {
                     //check if the letter is in the RIGHT position

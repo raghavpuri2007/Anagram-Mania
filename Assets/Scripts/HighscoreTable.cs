@@ -10,6 +10,14 @@ public class HighscoreTable : MonoBehaviour
     private Transform entry;
     private List<Transform> highScoreEntryTransformList;
 
+    public void Update() {
+        //escape key pressed
+        if (Input.GetKeyDown("escape"))
+        {
+            Application.Quit();
+        }
+    }
+    
     private void Awake() {
         entryContainer = transform.Find("HighScoreContainer");
         entry = entryContainer.Find("HighScoreEntry");
@@ -33,7 +41,7 @@ public class HighscoreTable : MonoBehaviour
     }
 
     private void CreateHighscoreEntryTransform(HighscoreEntry highScoreEntry, Transform container, List<Transform> transformList) {
-        float templateHeight = 80f;
+        float templateHeight = 95f;
         Transform entryTransfrom = Instantiate(entry, container);
         entryTransfrom.gameObject.SetActive(true);
         RectTransform entryRectTransform = entryTransfrom.GetComponent<RectTransform>();
