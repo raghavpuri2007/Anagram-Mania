@@ -1,4 +1,3 @@
-# Anagram-Mania #
 <img width="1248" alt="image" src="https://user-images.githubusercontent.com/82910597/231650725-65d9e48c-4536-4113-9227-1b3cef8dfc8c.png">
 
 ## About ##
