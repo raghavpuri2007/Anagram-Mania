@@ -30,7 +30,7 @@ through a local installation
 * Home Background from https://i.pinimg.com/originals/d2/63/55/d26355a4484cf412669476a57a263abc.png
 * Icons from https://icons8.com/
 
-## Future ##
+## Future Plans ##
 * Game of the Day
 * Online PvP mode
 
