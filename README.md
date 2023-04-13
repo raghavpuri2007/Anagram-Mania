@@ -22,6 +22,10 @@ Anagram Mania is my game for the 2022-2023 FBLA game and simulation programming 
 * Home Background from https://i.pinimg.com/originals/d2/63/55/d26355a4484cf412669476a57a263abc.png
 * Icons from https://icons8.com/
 
+## Future ##
+* Game of the Day
+* Online PvP mode
+
 ## Instructions ##
 1. Click on this link: https://drive.google.com/file/d/1rfX2jp2MaOtd9CvsVZmTF2PAzMq72Jt-/view?usp=share_link
 2. Download the folder
