@@ -34,7 +34,7 @@ through a local installation
 * Game of the Day
 * Online PvP mode
 
-## :U+1F517: Installation ##
+## :1F517: Installation ##
 1. Click on this link: https://drive.google.com/file/d/1rfX2jp2MaOtd9CvsVZmTF2PAzMq72Jt-/view?usp=share_link
 2. Download the folder
 3. Unzip the folder
