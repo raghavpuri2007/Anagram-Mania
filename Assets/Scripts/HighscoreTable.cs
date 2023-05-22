@@ -25,11 +25,6 @@ public class HighscoreTable : MonoBehaviour
         entry = entryContainer.Find("HighScoreEntry");
         entry.gameObject.SetActive(false);
 
-        //CODE TO CLEAR LEADERBOARD
-        // string jsonClear = JsonUtility.ToJson(new List<HighscoreEntry>());
-        // PlayerPrefs.SetString("highscoreTable", jsonClear);
-        // PlayerPrefs.Save();
-
         string jsonString = PlayerPrefs.GetString("highscoreTable");
         if(jsonString == "") {
             Highscores highscoresTest = new Highscores { highScoreEntryList = new List<HighscoreEntry>()};
