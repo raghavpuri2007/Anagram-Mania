@@ -131,7 +131,7 @@ public class MainPlayScript : MonoBehaviour
         for(int i = 0; i < mode; i++) {
             GameObject currentLetter = Instantiate(letterObject, transform.position, transform.rotation) as GameObject;
             currentLetter.transform.SetParent(GameObject.FindGameObjectWithTag("background").transform, false);
-            currentLetter.transform.position = new Vector3(dashes[i].transform.position.x, dashes[i].transform.position.y-200, 0);
+            currentLetter.transform.position = new Vector3(dashes[i].transform.position.x, dashes[i].transform.position.y-150, 0);
             currentLetter.name = $"letter{i+1}";
 
             TextMeshProUGUI currentLetterText =  currentLetter.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
@@ -183,15 +183,19 @@ public class MainPlayScript : MonoBehaviour
                 //position of current dash
                 Vector3 position = new Vector3(dashes[j].transform.position.x, dashes[j].transform.position.y+150, 0);
                 //check if letter is in a position
+                Debug.Log("Pos: " + letters[i].transform.position);
+                Debug.Log(j + ": " + position);
                 if(letters[i].transform.position == position) {
                     //check if the letter is in the RIGHT position
                     if(scrambledWord[i] != currentWord[j]) {
                         InCorrectPosition = false;
                     }
+                    Debug.Log("HELWDLQWOD");
                     break;
                 } else {
                     //if the letter is not sitting on a dash then we automatically know the answer is incorrect
                     if(j == dashes.Length-1) {
+                        Debug.Log("back");
                         return false;
                     }
                 }
