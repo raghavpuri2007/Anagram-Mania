@@ -99,10 +99,15 @@ public class MainPlayScript : MonoBehaviour
     //method to create dashes displayed on the screen
     private void createDashes() {
         //instantiate each dash with name and position
+        float width = Screen.width;
+        float height = Screen.height;
+        Debug.Log("Width: " + width);
         for(int i = 0; i < dashes.Length; i++) {
+            float xDif = width/6;
+
             GameObject dash = Instantiate(dashObject, new Vector3(0, -250, 0), transform.rotation) as GameObject;
             dash.transform.SetParent(GameObject.FindGameObjectWithTag("background").transform, false);
-            dash.transform.position = new Vector3(dash.transform.position.x+((-420+(-210*(mode-3)))+(i*420)), dash.transform.position.y -75, 0);
+            dash.transform.position = new Vector3(dash.transform.position.x+((-xDif+(-210*(mode-3)))+(i*xDif)), dash.transform.position.y - (height/15), 0);
             dash.name = $"Dash{i+1}";
             dashes[i] = dash;
         }
@@ -126,12 +131,14 @@ public class MainPlayScript : MonoBehaviour
     }
     //method to create the letters displayed on the game
     private void createLetters(string word) {
+        float width = Screen.width;
+        float height = Screen.height;
         scrambledWord = word;
         //instantiate each letter with name, position, and display text
         for(int i = 0; i < mode; i++) {
             GameObject currentLetter = Instantiate(letterObject, transform.position, transform.rotation) as GameObject;
             currentLetter.transform.SetParent(GameObject.FindGameObjectWithTag("background").transform, false);
-            currentLetter.transform.position = new Vector3(dashes[i].transform.position.x, dashes[i].transform.position.y-150, 0);
+            currentLetter.transform.position = new Vector3(dashes[i].transform.position.x, dashes[i].transform.position.y-(height/8), 0);
             currentLetter.name = $"letter{i+1}";
 
             TextMeshProUGUI currentLetterText =  currentLetter.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
@@ -144,12 +151,14 @@ public class MainPlayScript : MonoBehaviour
     private void createShop() {
         //create power ups
         float costMultiplier = 100;
+        float height = Screen.height;
+        Debug.Log("HEIGHT: " + height);
         for(int i = 0; i < 3; i++) {
             //create the power up object
             GameObject currentPowerUp = Instantiate(powerUpObject, transform.position, transform.rotation) as GameObject;
             currentPowerUp.transform.SetParent(GameObject.FindGameObjectWithTag("shop").transform, false);
             //put the power up in correct position (within shop rect)
-            currentPowerUp.transform.position = new Vector3(GameObject.FindGameObjectWithTag("shop").transform.position.x, GameObject.FindGameObjectWithTag("shop").transform.position.y + 150 + (i*-200), 0);
+            currentPowerUp.transform.position = new Vector3(GameObject.FindGameObjectWithTag("shop").transform.position.x, GameObject.FindGameObjectWithTag("shop").transform.position.y + (height/11) + (i*-height/8), 0);
             PowerUpScript script = currentPowerUp.GetComponent<PowerUpScript>();
             //for now it is preset power ups
 
@@ -175,27 +184,24 @@ public class MainPlayScript : MonoBehaviour
     }   
     //checks if the correct answer is inputted (always is checking in Update())
     bool isCorrectAnswer() {
+        float height = Screen.height;
         bool InCorrectPosition = true;
         //for each letter
         for(int i = 0; i < letters.Length; i++) {
             //for each dash
             for(int j = 0; j < dashes.Length; j++) {
                 //position of current dash
-                Vector3 position = new Vector3(dashes[j].transform.position.x, dashes[j].transform.position.y+150, 0);
+                Vector3 position = new Vector3(dashes[j].transform.position.x, dashes[j].transform.position.y+(height/11), 0);
                 //check if letter is in a position
-                Debug.Log("Pos: " + letters[i].transform.position);
-                Debug.Log(j + ": " + position);
                 if(letters[i].transform.position == position) {
                     //check if the letter is in the RIGHT position
                     if(scrambledWord[i] != currentWord[j]) {
                         InCorrectPosition = false;
                     }
-                    Debug.Log("HELWDLQWOD");
                     break;
                 } else {
                     //if the letter is not sitting on a dash then we automatically know the answer is incorrect
                     if(j == dashes.Length-1) {
-                        Debug.Log("back");
                         return false;
                     }
                 }
