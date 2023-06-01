@@ -37,7 +37,7 @@ through a local installation
 * Online PvP mode
 
 ## 🔧 Installation ##
-1. Click on this link: https://drive.google.com/file/d/1rfX2jp2MaOtd9CvsVZmTF2PAzMq72Jt-/view?usp=share_link
+1. Click on this link: [https://drive.google.com/file/d/1rfX2jp2MaOtd9CvsVZmTF2PAzMq72Jt-/view?usp=share_link](https://drive.google.com/drive/folders/1-jN-ip9lPEQkTIyq9GVfmG8bN2BRNOmq?usp=sharing)
 2. Download the folder
 3. Unzip the folder
 4. Click AnagramMania.exe
