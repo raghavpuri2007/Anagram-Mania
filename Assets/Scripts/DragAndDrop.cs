@@ -9,8 +9,8 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
     private Image letter;
     //variable that holds the original coordinates of current letter
     public Vector3 origin;
-    public float height = Screen.height;
-    public float width = Screen.width;
+    public float height;
+    public float width;
     
     //method that runs when the letter is being dragged
     public void OnDrag(PointerEventData eventData) {
@@ -24,10 +24,15 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         //for each dash check to make sure it is not over another dash
         for(int i = 0; i < MainPlayScript.dashes.Length; i++) {
             if(dashChecker(MainPlayScript.dashes[i])) {
-                Debug.Log(MainPlayScript.dashes[i].transform.position.y);
+                Debug.Log("HELLO: " + height);
                 //checks if letter is in same spot
                 replaceLetter(i);
-                letter.transform.position = new Vector3(MainPlayScript.dashes[i].transform.position.x, MainPlayScript.dashes[i].transform.position.y + (height/25f), 0);
+                float yPos = MainPlayScript.dashes[i].transform.position.y + (height/12f);
+                if(height < 1000) {
+                    yPos = MainPlayScript.dashes[i].transform.position.y + (height/10f);
+                }
+                letter.transform.position = new Vector3(MainPlayScript.dashes[i].transform.position.x, yPos, 0);
+                Debug.Log("Letter Pos: " + letter.transform.position);
                 foundDash = true;
             }
         }
@@ -42,6 +47,8 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         letter = GetComponent<Image>();
         origin = letter.transform.position;
+        height = Screen.height;
+        width = Screen.width;
     }
     
     //method that checks if a letter is within good distance of a dash
@@ -59,7 +66,11 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
     private void replaceLetter(int dashIndex) {
         for(int i = 0; i < MainPlayScript.letters.Length; i++) {
             //if two letters share location
-            if(MainPlayScript.letters[i].transform.position == new Vector3(MainPlayScript.dashes[dashIndex].transform.position.x, MainPlayScript.dashes[dashIndex].transform.position.y + (height/11), 0)) {
+            float yPos = MainPlayScript.dashes[i].transform.position.y + (height/12f);
+            if(height < 1000) {
+                yPos = MainPlayScript.dashes[i].transform.position.y + (height/10f);
+            }
+            if(MainPlayScript.letters[i].transform.position.ToString("F8").Equals(new Vector3(MainPlayScript.dashes[dashIndex].transform.position.x, yPos, 0).ToString("F8"))) {
                 //send letter back to start
                 MainPlayScript.letters[i].transform.position = MainPlayScript.letters[i].GetComponent<DragAndDrop>().origin;
             }

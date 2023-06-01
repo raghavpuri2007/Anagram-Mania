@@ -107,12 +107,17 @@ public class PowerUpScript : MonoBehaviour
     //free letter power up implementation
     void freeLetter() {
         //purchase the power up
+        float height = Screen.height;
         mainScript.increaseScore(-int.Parse(cost));
         //go through each letter and dash
         for(int i = 0; i < MainPlayScript.letters.Length; i++) {
             for(int j = 0; j < MainPlayScript.dashes.Length; j++) {
                 //position of each dash
-                Vector3 position = new Vector3(MainPlayScript.dashes[j].transform.position.x, MainPlayScript.dashes[j].transform.position.y+150, 0);
+                float yPos = MainPlayScript.dashes[i].transform.position.y + (height/12f);
+                if(height < 1000) {
+                    yPos = MainPlayScript.dashes[i].transform.position.y + (height/10f);
+                }
+                Vector3 position = new Vector3(MainPlayScript.dashes[j].transform.position.x, yPos, 0);
                 //if letter is on this dash, move onto new dash
                 if(MainPlayScript.letters[i].transform.position == position) {
                     j = MainPlayScript.dashes.Length;
@@ -120,8 +125,11 @@ public class PowerUpScript : MonoBehaviour
                     if(j == MainPlayScript.dashes.Length-1) {
                         //found a letter not moved
                         int index = mainScript.currentWord.IndexOf(mainScript.scrambledWord[i]);
-                        MainPlayScript.letters[i].transform.position = new Vector3(MainPlayScript.dashes[index].transform.position.x, MainPlayScript.dashes[index].transform.position.y + 150, 0);;
-                        
+                        float otherYPos = MainPlayScript.dashes[i].transform.position.y + (height/12f);
+                        if(height < 1000) {
+                            otherYPos = MainPlayScript.dashes[i].transform.position.y + (height/10f);
+                        }
+                        MainPlayScript.letters[i].transform.position = new Vector3(MainPlayScript.dashes[index].transform.position.x, otherYPos, 0);                        
                         //getting out of loops
                         i = MainPlayScript.letters.Length;
                         break;

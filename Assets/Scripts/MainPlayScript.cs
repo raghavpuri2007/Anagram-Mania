@@ -86,6 +86,7 @@ public class MainPlayScript : MonoBehaviour
         timerStuff();
         //always checking if the user did the correct answer
         if(isCorrectAnswer()) {
+            Debug.Log("LOL");
             correctAnswer();
         }
         updateStreak();
@@ -104,10 +105,9 @@ public class MainPlayScript : MonoBehaviour
         Debug.Log("Width: " + width);
         for(int i = 0; i < dashes.Length; i++) {
             float xDif = width/6;
-
             GameObject dash = Instantiate(dashObject, new Vector3(0, -250, 0), transform.rotation) as GameObject;
             dash.transform.SetParent(GameObject.FindGameObjectWithTag("background").transform, false);
-            dash.transform.position = new Vector3(dash.transform.position.x+((-xDif+(-210*(mode-3)))+(i*xDif)), dash.transform.position.y - (height/15), 0);
+            dash.transform.position = new Vector3(dash.transform.position.x+((-xDif+(-(xDif/2)*(mode-3)))+(i*xDif)), dash.transform.position.y - (height/15), 0);
             dash.name = $"Dash{i+1}";
             dashes[i] = dash;
         }
@@ -152,7 +152,6 @@ public class MainPlayScript : MonoBehaviour
         //create power ups
         float costMultiplier = 100;
         float height = Screen.height;
-        Debug.Log("HEIGHT: " + height);
         for(int i = 0; i < 3; i++) {
             //create the power up object
             GameObject currentPowerUp = Instantiate(powerUpObject, transform.position, transform.rotation) as GameObject;
@@ -191,9 +190,13 @@ public class MainPlayScript : MonoBehaviour
             //for each dash
             for(int j = 0; j < dashes.Length; j++) {
                 //position of current dash
-                Vector3 position = new Vector3(dashes[j].transform.position.x, dashes[j].transform.position.y+(height/11), 0);
+                float yPos = dashes[j].transform.position.y+(height/12f);
+                if(height < 1000) {
+                    yPos = dashes[j].transform.position.y+(height/10f);
+                }
+                Vector3 position = new Vector3(dashes[j].transform.position.x, yPos, 0);
                 //check if letter is in a position
-                if(letters[i].transform.position == position) {
+                if(letters[i].transform.position.ToString("F8").Equals(position.ToString("F8"))) {
                     //check if the letter is in the RIGHT position
                     if(scrambledWord[i] != currentWord[j]) {
                         InCorrectPosition = false;
@@ -204,7 +207,7 @@ public class MainPlayScript : MonoBehaviour
                     if(j == dashes.Length-1) {
                         return false;
                     }
-                }
+                }                
             }
         }
         //if in correct position return true;
